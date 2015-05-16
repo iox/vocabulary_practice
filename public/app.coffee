@@ -18,7 +18,6 @@ $ ->
 root.load_next_item = ->
   if $('#danish').html() == '&nbsp;'
     $('#danish').html(items[current_index]['l2_text'])
-    $('#play-button').show()
   else
     current_index += 1
     if current_index >= items.length
@@ -27,7 +26,6 @@ root.load_next_item = ->
 
 root.load_item = ->
   $('#danish').html('&nbsp;')
-  $('#play-button').hide()
   $('#english').html(items[current_index]['l1_text'])
   $('#counter').html("#{current_index + 1} / #{items.length}")
 

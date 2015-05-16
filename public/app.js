@@ -30,8 +30,7 @@
 
   root.load_next_item = function() {
     if ($('#danish').html() === '&nbsp;') {
-      $('#danish').html(items[current_index]['l2_text']);
-      return $('#play-button').show();
+      return $('#danish').html(items[current_index]['l2_text']);
     } else {
       current_index += 1;
       if (current_index >= items.length) {
@@ -43,7 +42,6 @@
 
   root.load_item = function() {
     $('#danish').html('&nbsp;');
-    $('#play-button').hide();
     $('#english').html(items[current_index]['l1_text']);
     return $('#counter').html("" + (current_index + 1) + " / " + items.length);
   };
