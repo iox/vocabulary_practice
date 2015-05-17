@@ -48,6 +48,9 @@
 
   root.play = function() {
     var text;
+    if ($('#danish').html() === '&nbsp;') {
+      $('#danish').html(items[current_index]['l2_text']);
+    }
     text = items[current_index]['l2_text'];
     audioElement.setAttribute("src", "/say/" + text);
     audioElement.setAttribute("autoplay", "autoplay");

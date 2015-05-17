@@ -30,6 +30,9 @@ root.load_item = ->
   $('#counter').html("#{current_index + 1} / #{items.length}")
 
 root.play = ->
+  if $('#danish').html() == '&nbsp;'
+    $('#danish').html(items[current_index]['l2_text'])
+
   text = items[current_index]['l2_text']
 
   audioElement.setAttribute "src", "/say/#{text}"
