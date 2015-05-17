@@ -1,4 +1,4 @@
-url = './words.json'
+urls = ['./words.json', './words2.json']
 items = []
 current_index = 0
 root = exports ? this
@@ -6,13 +6,10 @@ audioElement = document.createElement("audio")
 
 
 $ ->
-  $.getJSON url, ( data ) ->
-    items = data["review"]["trainer_items"]
-    console.log('about to call load_next_item')
-    load_item()
-
-    for item in data["review"]["trainer_items"]
-      console.log(item)
+  for url in urls
+    $.getJSON url, ( data ) ->
+      Array::push.apply items, data["review"]["trainer_items"]
+      load_item()
 
 
 root.load_next_item = ->
