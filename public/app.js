@@ -54,7 +54,7 @@
     } else {
       audioElement.setAttribute("src", "/say_ogg/" + text);
     }
-    audioElement.setAttribute("autoplay", "autoplay");
+    audioElement.play();
     $.get();
     return audioElement.addEventListener("load", function() {
       return audioElement.play();

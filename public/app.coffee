@@ -36,7 +36,8 @@ root.play = ->
     audioElement.setAttribute "src", "/say_mp3/#{text}"
   else
     audioElement.setAttribute "src", "/say_ogg/#{text}"
-  audioElement.setAttribute "autoplay", "autoplay"
+  audioElement.play()  
+  #audioElement.setAttribute "autoplay", "autoplay"
 
   $.get()
   audioElement.addEventListener "load", ->
