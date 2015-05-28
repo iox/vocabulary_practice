@@ -49,7 +49,11 @@
       $('#danish').html(items[current_index]['l2_text']);
     }
     text = items[current_index]['l2_text'];
-    audioElement.setAttribute("src", "/say/" + text);
+    if (audioElement.canPlayType('audio/mpeg;')) {
+      audioElement.setAttribute("src", "/say_mp3/" + text);
+    } else {
+      audioElement.setAttribute("src", "/say_ogg/" + text);
+    }
     audioElement.setAttribute("autoplay", "autoplay");
     $.get();
     return audioElement.addEventListener("load", function() {
