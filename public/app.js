@@ -2,7 +2,7 @@
 (function() {
   var audioElement, current_index, items, root, urls;
 
-  urls = ['./words.json', './words2.json'];
+  urls = ['./words.json'];
 
   items = [];
 

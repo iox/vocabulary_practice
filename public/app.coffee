@@ -1,4 +1,4 @@
-urls = ['./words.json', './words2.json']
+urls = ['./words.json']
 items = []
 current_index = 0
 root = exports ? this
@@ -36,7 +36,7 @@ root.play = ->
     audioElement.setAttribute "src", "/say_mp3/#{text}"
   else
     audioElement.setAttribute "src", "/say_ogg/#{text}"
-  audioElement.play()  
+  audioElement.play()
   #audioElement.setAttribute "autoplay", "autoplay"
 
   $.get()
