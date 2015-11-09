@@ -15,18 +15,14 @@ get '/' do
   send_file "public/index.html"
 end
 
-# TODO
-# get '/say_ogg/:text' do
-  # params[:text].to_file "da", "temp.mp3"
-  # `dir2ogg temp.mp3 --mp3-decoder=lame`
-  # send_file "temp.ogg"
-# end
+get '/say_ogg/:text' do
+  download_mp3(params[:text])
+  `dir2ogg temp.mp3 --mp3-decoder=lame`
+  send_file "temp.ogg"
+end
 
 get '/say_mp3/:text' do
-  command = "curl 'http://api.voicerss.org/?key=44b79165d27c459a80d64fabc2d35c54&src=#{URI::encode(params[:text])}&hl=da-dk' > temp.mp3"
-  puts "executing: #{command}"
-  system(command)
-
+  download_mp3(params[:text])
   send_file "temp.mp3"
 end
 
@@ -57,4 +53,11 @@ get '/load_new_words' do
 
   # Redirigir a /
   redirect to '/'
+end
+
+
+def download_mp3(text)
+  command = "curl 'http://api.voicerss.org/?key=44b79165d27c459a80d64fabc2d35c54&src=#{URI::encode(text)}&hl=da-dk&f=44khz_16bit_mono' > temp.mp3"
+  puts "executing: #{command}"
+  system(command)
 end
