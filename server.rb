@@ -16,14 +16,14 @@ get '/' do
 end
 
 get '/say_ogg/:text' do
-  download_mp3(params[:text])
+  mp3 = download_mp3(params[:text])
   `dir2ogg temp.mp3 --mp3-decoder=lame`
   send_file "temp.ogg"
 end
 
 get '/say_mp3/:text' do
-  download_mp3(params[:text])
-  send_file "temp.mp3"
+  mp3 = download_mp3(params[:text])
+  send_file mp3
 end
 
 get '/load_new_words' do
@@ -57,7 +57,16 @@ end
 
 
 def download_mp3(text)
-  command = "curl 'http://api.voicerss.org/?key=44b79165d27c459a80d64fabc2d35c54&src=#{URI::encode(text)}&hl=da-dk&f=44khz_16bit_mono' > temp.mp3"
-  puts "executing: #{command}"
-  system(command)
+  safe_text = text.gsub(/[^\w]/, '_')
+  file_name = "mp3/#{safe_text}.mp3"
+
+  unless File.exist?(file_name)
+    command = "curl 'http://api.voicerss.org/?key=44b79165d27c459a80d64fabc2d35c54&src=#{URI::encode(text)}&hl=da-dk&f=44khz_16bit_mono' > #{file_name}"
+    puts "executing: #{command}"
+    system(command)
+  else
+    puts "Sending cached file #{file_name}"
+  end
+
+  return file_name
 end
